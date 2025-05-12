@@ -53,7 +53,7 @@ const Resources: React.FC = () => {
             icon={<BookOpen className="h-6 w-6" />}
             title="Documentation"
             description="Comprehensive documentation with API references, tutorials, and examples."
-            link="https://docs.emerpro.de"
+            link="https://docs.mrpro.rocks"
             linkText="Read the docs"
           />
           
