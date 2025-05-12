@@ -128,6 +128,16 @@ const Footer: React.FC = () => {
                     Contribute
                   </a>
                 </li>
+                <li>
+                  <a 
+                    href="https://github.com/PTB-MR/mrpro/graphs/contributors" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                  >
+                    Contributors
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
