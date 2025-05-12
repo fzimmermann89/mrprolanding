@@ -134,7 +134,7 @@ const Navbar: React.FC = () => {
                   <BookOpen className="h-5 w-5" />
                 </a>
                 <a 
-                  href="https://colab.research.google.com/github/PTB-MR/mrpro/blob/main/examples/notebooks/direct_reconstruction.ipynb" 
+                  href="https://colab.research.google.com/github/PTB-MR/mrpro/blob/main/examples/notebooks/cartesian_reconstruction.ipynb" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
