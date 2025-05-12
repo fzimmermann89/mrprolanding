@@ -65,12 +65,12 @@ const Features: React.FC = () => {
     },
     {
       icon: <Building2 className="h-6 w-6" />,
-      title: "Building Blocks",
-      description: "Comprehensive toolkit including optimizers, coil sensitivity estimation, density compensation, and differentiable optimization for developing state-of-the-art reconstruction methods."
+      title: "AI Building Blocks",
+      description: "Comprehensive toolkit including differentiable linear operators and differentiable optimization for developing state-of-the-art reconstruction methods."
     },
     {
       icon: <DatasetIcon className="h-6 w-6" />,
-      title: "Public Datasets",
+      title: "Training Datasets",
       description: "Unified access to popular MRI datasets including FastMRI, M4raw low field data, and Brainweb through a common interface."
     },
     {
@@ -100,8 +100,7 @@ const Features: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Main Features</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            MRpro provides a comprehensive set of tools for MR image reconstruction and processing, 
-            built specifically for PyTorch.
+            MRpro provides a comprehensive set of tools for MR image reconstruction and processing in python
           </p>
         </div>
         
