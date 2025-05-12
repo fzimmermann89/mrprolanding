@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 
+interface Contributor {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+  contributions: number;
+}
+
 const Footer: React.FC = () => {
+  const [contributors, setContributors] = useState<Contributor[]>([]);
+
+  useEffect(() => {
+    const fetchContributors = async () => {
+      try {
+        const response = await fetch('https://api.github.com/repos/PTB-MR/mrpro/contributors');
+        const data = await response.json();
+        setContributors(data);
+      } catch (error) {
+        console.error('Error fetching contributors:', error);
+      }
+    };
+
+    fetchContributors();
+  }, []);
+
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4">
@@ -143,21 +166,48 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="border-t border-gray-800 pt-8">
-            <div className="text-sm text-gray-400">
-              <h3 className="font-semibold mb-2">Impressum</h3>
-              <p className="mb-2">
-                Verantwortlich im Sinne des Pressegesetzes:
-              </p>
-              <p>
-                Felix Zimmermann<br />
-                Physikalisch-Technische Bundesanstalt (PTB)<br />
-                Abbestraße 2-12<br />
-                10587 Berlin<br />
-                Deutschland
-              </p>
-              <p className="mt-2">
-                E-Mail: <a href="mailto:info@emerpro.de" className="hover:text-white transition-colors">info@emerpro.de</a>
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="text-sm text-gray-400">
+                <h3 className="font-semibold mb-2">Impressum</h3>
+                <p className="mb-2">
+                  Verantwortlich im Sinne des Pressegesetzes:
+                </p>
+                <p>
+                  Felix Zimmermann<br />
+                  Physikalisch-Technische Bundesanstalt (PTB)<br />
+                  Abbestraße 2-12<br />
+                  10587 Berlin<br />
+                  Deutschland
+                </p>
+                <p className="mt-2">
+                  E-Mail: <a href="mailto:info@emerpro.de" className="hover:text-white transition-colors">info@emerpro.de</a>
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="text-sm font-semibold text-gray-400 mb-4">Contributors</h3>
+                <div className="flex flex-wrap gap-2">
+                  {contributors.map((contributor) => (
+                    <a
+                      key={contributor.login}
+                      href={contributor.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative"
+                      title={`${contributor.login} (${contributor.contributions} contributions)`}
+                    >
+                      <img
+                        src={contributor.avatar_url}
+                        alt={`${contributor.login}'s avatar`}
+                        className="w-10 h-10 rounded-full hover:ring-2 hover:ring-blue-500 transition-all"
+                      />
+                      <span className="absolute -bottom-1 -right-1 bg-gray-800 text-xs text-white px-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        {contributor.contributions}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
