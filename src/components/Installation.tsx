@@ -43,7 +43,7 @@ const Installation: React.FC = () => {
             <div className="p-6 bg-gray-900">
               <p className="text-gray-400 text-sm">
                 MRpro requires Python 3.7+ and PyTorch 1.9+. For more installation options and detailed requirements, 
-                please refer to the <a href="https://ptb-mr.github.io/mrpro/getting_started.html" className="text-blue-400 hover:text-blue-300 transition-colors">documentation</a>.
+                please refer to the <a href="https://docs.emerpro.de/getting_started.html" className="text-blue-400 hover:text-blue-300 transition-colors">documentation</a>.
               </p>
             </div>
           </div>
