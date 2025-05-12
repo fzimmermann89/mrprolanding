@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Contributor {
   login: string;
@@ -11,42 +11,39 @@ interface Contributor {
 // Blacklist of contributors to exclude
 const EXCLUDED_CONTRIBUTORS = ['pre-commit-ci', 'dependabot', 'dependabot[bot]'];
 
-async function getContributors() {
-  try {
-    const response = await fetch('https://api.github.com/repos/PTB-MR/mrpro/contributors');
-    const data = await response.json();
+const Contributors: React.FC = () => {
+  const [contributors, setContributors] = useState<Contributor[]>([]);
 
-    if (!Array.isArray(data)) {
-      console.error('Unexpected data format from GitHub API:', data);
-      return [];
-    }
+  useEffect(() => {
+    const fetchContributors = async () => {
+      try {
+        const response = await fetch('https://api.github.com/repos/PTB-MR/mrpro/contributors');
+        const data = await response.json();
+        const filteredContributors = data.filter(
+          (contributor: Contributor) => !EXCLUDED_CONTRIBUTORS.includes(contributor.login)
+        );
 
-    const filteredContributors = data.filter(
-      (contributor: Contributor) => !EXCLUDED_CONTRIBUTORS.includes(contributor.login)
-    );
+        // Fetch real names for each contributor
+        const contributorsWithNames = await Promise.all(
+          filteredContributors.map(async (contributor: Contributor) => {
+            try {
+              const userResponse = await fetch(`https://api.github.com/users/${contributor.login}`);
+              const userData = await userResponse.json();
+              return { ...contributor, name: userData.name || contributor.login };
+            } catch (error) {
+              return { ...contributor, name: contributor.login };
+            }
+          })
+        );
 
-    // Fetch real names for each contributor
-    const contributorsWithNames = await Promise.all(
-      filteredContributors.map(async (contributor: Contributor) => {
-        try {
-          const userResponse = await fetch(`https://api.github.com/users/${contributor.login}`);
-          const userData = await userResponse.json();
-          return { ...contributor, name: userData.name || contributor.login };
-        } catch (error) {
-          return { ...contributor, name: contributor.login };
-        }
-      })
-    );
+        setContributors(contributorsWithNames);
+      } catch (error) {
+        console.error('Error fetching contributors:', error);
+      }
+    };
 
-    return contributorsWithNames;
-  } catch (error) {
-    console.error('Error fetching contributors:', error);
-    return [];
-  }
-}
-
-const Contributors = async () => {
-  const contributors = await getContributors();
+    fetchContributors();
+  }, []);
 
   return (
     <div>
