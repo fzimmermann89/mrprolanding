@@ -55,7 +55,7 @@ const Installation: React.FC = () => {
                 Experiment with MRpro without installing anything on your local machine by using Google Colab.
               </p>
               <a
-                href="https://colab.research.google.com/github/PTB-MR/mrpro/blob/main/examples/notebooks/direct_reconstruction.ipynb"
+                href="https://colab.research.google.com/github/PTB-MR/mrpro/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors"
