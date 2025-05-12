@@ -67,11 +67,11 @@ const Hero: React.FC = () => {
                 <pre className="text-xs md:text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
                   <code className="font-mono whitespace-pre">
                     <span className="text-gray-400"># Tell mrpro the type of trajectory</span>
-                    {'\n'}trajectory = mrpro.data.traj_calculators.KTrajectoryCartesian(){'\n\n'}
+                    {'\n'}trajectory = KTrajectoryCartesian(){'\n\n'}
                     <span className="text-gray-400"># Load in the Data from the ISMRMRD file</span>
-                    {'\n'}kdata = mrpro.data.KData.from_file(file, trajectory){'\n\n'}
+                    {'\n'}kdata = KData.from_file(filename, trajectory){'\n\n'}
                     <span className="text-gray-400"># Perform the reconstruction</span>
-                    {'\n'}reconstruction = mrpro.algorithms.reconstruction.DirectReconstruction(kdata){'\n'}img = reconstruction(kdata)
+                    {'\n'}reconstruction = DirectReconstruction(kdata){'\n'}img = reconstruction(kdata)
                   </code>
                 </pre>
                 <div className="mt-4 flex justify-end">
