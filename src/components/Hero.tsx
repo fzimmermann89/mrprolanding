@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
                 GitHub
               </a>
               <a
-                href="https://ptb-mr.github.io/mrpro/"
+                href="https://docs.emerpro.de"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-white border border-gray-300 text-gray-800 py-3 px-6 rounded-lg font-medium hover:bg-gray-50 transition-colors"
