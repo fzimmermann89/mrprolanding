@@ -66,8 +66,8 @@ const Hero: React.FC = () => {
                 <div className="text-sm font-mono mb-2 text-gray-500">Example: Simple reconstruction</div>
                 <pre className="text-xs md:text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
                   <code className="language-python text-gray-800">
-{`# Read the trajectory from the ISMRMRD file
-trajectory = mrpro.data.traj_calculators.KTrajectoryIsmrmrd()
+{`# Tell mrpro the type of trajectory
+trajectory = mrpro.data.traj_calculators.KTrajectoryCartesian()
 
 # Load in the Data from the ISMRMRD file
 kdata = mrpro.data.KData.from_file(data_file.name, trajectory)
@@ -75,12 +75,7 @@ kdata = mrpro.data.KData.from_file(data_file.name, trajectory)
 # Perform the reconstruction
 reconstruction = mrpro.algorithms.reconstruction.DirectReconstruction(kdata)
 img = reconstruction(kdata)
-
-# Display the result
-plt.figure(figsize=(10, 10))
-plt.imshow(img.abs()[0, 0].cpu(), cmap='gray')
-plt.axis('off')
-plt.show()`}
+`}
                   </code>
                 </pre>
                 <div className="mt-4 flex justify-end">
