@@ -21,7 +21,7 @@ model = MagnitudeOp() @ InversionRecovery(ti=data.header.ti)
 functional = MSE(target=data.rss()) @ model
 
 # Run optimization
-params_result = lbfgs(functional, [m0_start, t1_start], n_iterations=n_iterations, learning_rate=learning_rate)`,
+m0, t1 = lbfgs(functional, [m0_start, t1_start])`,
     link: 'https://github.com/PTB-MR/mrpro/blob/main/examples/scripts/qmri_sg_challenge_2024_t1.py'
   },
   {
