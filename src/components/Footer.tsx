@@ -86,14 +86,14 @@ const Footer: React.FC = () => {
                 Development was initiated at PTB Berlin.
               </p>
               <p className="text-gray-400 text-sm mt-4">
-                Licensed under the{' '}
+                Licensed under the Apache License 2.0 —{' '}
                 <a 
                   href="https://github.com/PTB-MR/mrpro/blob/main/LICENSE" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                  className="text-gray-400 hover:text-white transition-colors"
                 >
-                  Apache License 2.0
+                  view license
                 </a>
               </p>
             </div>
