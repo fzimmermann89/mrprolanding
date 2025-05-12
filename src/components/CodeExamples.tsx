@@ -15,22 +15,22 @@ const examples: CodeExampleProps[] = [
     title: 'Quantitative Parameters',
     description: 'Quantitative parameter maps can be obtained by creating a functional to be minimized and calling a non-linear solver such as ADAM.',
     code: `# Define signal model
-model = MagnitudeOp() @ InversionRecovery(ti=idata_multi_ti.header.ti)
+model = MagnitudeOp() @ InversionRecovery(ti=data.header.ti)
 
 # Define loss function and combine with signal model
-mse = MSE(idata_multi_ti.data.abs())
-functional = mse @ model
+functional = MSE(target=data.rss()) @ model
 
 # Run optimization
-params_result = adam(functional, [m0_start, t1_start], n_iterations=n_iterations, learning_rate=learning_rate)`,
+params_result = lbfgs(functional, [m0_start, t1_start], n_iterations=n_iterations, learning_rate=learning_rate)`,
     link: 'https://github.com/PTB-MR/mrpro/blob/main/examples/scripts/qmri_sg_challenge_2024_t1.py'
   },
   {
     id: 'pulseq',
     title: 'Pulseq Support',
     description: 'For data acquired using pulseq-based sequences, MRpro can automatically calculate the trajectory directly from the provided seq-file, making it easy to work with custom sequences.',
-    code: `# Read raw data and calculate trajectory using KTrajectoryPulseq
-kdata = KData.from_file(data_file.name, KTrajectoryPulseq(seq_path=seq_file.name))`,
+    code: `# Tell mrpro to get the trajectory from a Pulseq file
+traj=KTrajectoryPulseq("spiral2d.seq")
+kdata = KData.from_file("spiral2d.mrd", traj)`,
     link: 'https://github.com/PTB-MR/mrpro/blob/main/examples/scripts/comparison_trajectory_calculators.py'
   }
 ];
