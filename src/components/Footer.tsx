@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <a 
-                    href="https://docs.emerpro.de" 
+                    href="https://docs.mrpro.rocks" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
