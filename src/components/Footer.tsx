@@ -8,6 +8,9 @@ interface Contributor {
   contributions: number;
 }
 
+// Blacklist of contributors to exclude
+const EXCLUDED_CONTRIBUTORS = ['pre-commit-ci', 'dependabot', 'dependabot[bot]'];
+
 const Footer: React.FC = () => {
   const [contributors, setContributors] = useState<Contributor[]>([]);
 
@@ -16,7 +19,10 @@ const Footer: React.FC = () => {
       try {
         const response = await fetch('https://api.github.com/repos/PTB-MR/mrpro/contributors');
         const data = await response.json();
-        setContributors(data);
+        const filteredContributors = data.filter(
+          (contributor: Contributor) => !EXCLUDED_CONTRIBUTORS.includes(contributor.login)
+        );
+        setContributors(filteredContributors);
       } catch (error) {
         console.error('Error fetching contributors:', error);
       }
@@ -166,7 +172,29 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="border-t border-gray-800 pt-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="md:col-span-3">
+                <h3 className="text-sm font-semibold text-gray-400 mb-4">Contributors</h3>
+                <div className="flex flex-wrap gap-2">
+                  {contributors.map((contributor) => (
+                    <a
+                      key={contributor.login}
+                      href={contributor.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative"
+                      title={contributor.login}
+                    >
+                      <img
+                        src={contributor.avatar_url}
+                        alt={`${contributor.login}'s avatar`}
+                        className="w-10 h-10 rounded-full hover:ring-2 hover:ring-blue-500 transition-all"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+              
               <div className="text-sm text-gray-400">
                 <h3 className="font-semibold mb-2">Impressum</h3>
                 <p className="mb-2">
@@ -182,31 +210,6 @@ const Footer: React.FC = () => {
                 <p className="mt-2">
                   E-Mail: <a href="mailto:info@emerpro.de" className="hover:text-white transition-colors">info@emerpro.de</a>
                 </p>
-              </div>
-              
-              <div>
-                <h3 className="text-sm font-semibold text-gray-400 mb-4">Contributors</h3>
-                <div className="flex flex-wrap gap-2">
-                  {contributors.map((contributor) => (
-                    <a
-                      key={contributor.login}
-                      href={contributor.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative"
-                      title={`${contributor.login} (${contributor.contributions} contributions)`}
-                    >
-                      <img
-                        src={contributor.avatar_url}
-                        alt={`${contributor.login}'s avatar`}
-                        className="w-10 h-10 rounded-full hover:ring-2 hover:ring-blue-500 transition-all"
-                      />
-                      <span className="absolute -bottom-1 -right-1 bg-gray-800 text-xs text-white px-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                        {contributor.contributions}
-                      </span>
-                    </a>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
