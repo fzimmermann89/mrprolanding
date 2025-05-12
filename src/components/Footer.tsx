@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
               <ul className="space-y-2">
                 <li>
                   <a 
-                    href="https://colab.research.google.com/github/PTB-MR/mrpro/blob/main/examples/notebooks/direct_reconstruction.ipynb" 
+                    href="https://colab.research.google.com/github/PTB-MR/mrpro/" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
