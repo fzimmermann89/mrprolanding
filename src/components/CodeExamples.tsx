@@ -59,12 +59,12 @@ const CodeExample: React.FC<{ example: CodeExampleProps }> = ({ example }) => {
               {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4 text-gray-500" />}
             </button>
           </div>
-          <pre className="bg-gray-50 p-4 rounded-lg text-sm whitespace-pre-wrap">
-            <code className="font-mono">
+          <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
+            <code className="font-mono whitespace-pre">
               {example.code.split('\n').map((line, index) => (
                 <span key={index} className={line.trim().startsWith('#') ? 'text-gray-400' : 'text-gray-800'}>
                   {line}
-                  {index < example.code.split('\n').length - 1 && '\n'}
+                  {index < example.code.split('\n').length - 1 ? '\n' : ''}
                 </span>
               ))}
             </code>
@@ -75,7 +75,7 @@ const CodeExample: React.FC<{ example: CodeExampleProps }> = ({ example }) => {
             href={example.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 transition-colors text-sm"
+            className="text-sm text-blue-600 hover:text-blue-700 transition-colors"
           >
             View full example →
           </a>

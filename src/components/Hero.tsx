@@ -64,14 +64,14 @@ const Hero: React.FC = () => {
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-600 to-teal-500 opacity-75 blur"></div>
               <div className="relative bg-white p-6 rounded-2xl shadow-xl overflow-hidden">
                 <div className="text-sm font-mono mb-2 text-gray-500">Example: Simple reconstruction</div>
-                <pre className="text-xs md:text-sm bg-gray-50 p-4 rounded-lg whitespace-pre-wrap">
-                  <code className="font-mono">
-                    {`# Tell mrpro the type of trajectory\ntrajectory = mrpro.data.traj_calculators.KTrajectoryCartesian()\n\n# Load in the Data from the ISMRMRD file\nkdata = mrpro.data.KData.from_file(file, trajectory)\n\n# Perform the reconstruction\nreconstruction = mrpro.algorithms.reconstruction.DirectReconstruction(kdata)\nimg = reconstruction(kdata)`.split('\n').map((line, index) => (
-                      <span key={index} className={line.trim().startsWith('#') ? 'text-gray-400' : 'text-gray-800'}>
-                        {line}
-                        {index < 7 && '\n'}
-                      </span>
-                    ))}
+                <pre className="text-xs md:text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
+                  <code className="font-mono whitespace-pre">
+                    <span className="text-gray-400"># Tell mrpro the type of trajectory</span>
+                    {'\n'}trajectory = mrpro.data.traj_calculators.KTrajectoryCartesian(){'\n\n'}
+                    <span className="text-gray-400"># Load in the Data from the ISMRMRD file</span>
+                    {'\n'}kdata = mrpro.data.KData.from_file(file, trajectory){'\n\n'}
+                    <span className="text-gray-400"># Perform the reconstruction</span>
+                    {'\n'}reconstruction = mrpro.algorithms.reconstruction.DirectReconstruction(kdata){'\n'}img = reconstruction(kdata)
                   </code>
                 </pre>
                 <div className="mt-4 flex justify-end">
