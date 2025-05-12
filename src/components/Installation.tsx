@@ -70,7 +70,7 @@ const Installation: React.FC = () => {
                 Explore the comprehensive documentation to learn all the features and capabilities of MRpro.
               </p>
               <a
-                href="https://docs.emerpro.de"
+                href="https://docs.mrpro.rocks"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors"
