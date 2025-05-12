@@ -49,7 +49,7 @@ const Hero: React.FC = () => {
                 Docs
               </a>
               <a
-                href="https://colab.research.google.com/github/PTB-MR/mrpro/blob/main/examples/notebooks/direct_reconstruction.ipynb"
+                href="https://colab.research.google.com/github/PTB-MR/mrpro/blob/main/examples/notebooks/cartesian_reconstruction.ipynb"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-white border border-gray-300 text-gray-800 py-3 px-6 rounded-lg font-medium hover:bg-gray-50 transition-colors"
