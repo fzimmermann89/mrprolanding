@@ -29,9 +29,31 @@ m0, t1 = lbfgs(functional, [m0_start, t1_start])`,
     title: 'Pulseq Support',
     description: 'For data acquired using pulseq-based sequences, MRpro can automatically calculate the trajectory directly from the provided seq-file, making it easy to work with custom sequences.',
     code: `# Tell mrpro to get the trajectory from a Pulseq file
-traj=KTrajectoryPulseq("spiral2d.seq")
-kdata = KData.from_file("spiral2d.mrd", traj)`,
+trajectory = KTrajectoryPulseq("spiral2d.seq")
+kdata = KData.from_file("spiral2d.mrd", trajectory)`,
     link: 'https://github.com/PTB-MR/mrpro/blob/main/examples/scripts/comparison_trajectory_calculators.py'
+  },
+    {
+    id: 'tv',
+    title: 'Advanced reconstruction',
+    description: 'Besides AI, MRpro also contains the building blocks to recreate many compressed sensing algorithms.',
+    code: `# Undersample data by indexing
+kdata_us = kdata[...,::4,:]
+
+# Create an acquisition model based on the undersampling
+fourier_operator = FourierOp.from_kdata(kdata_us)
+csm_operator = CsmData.from_kdata_inati(kdata_us).as_operator()
+acquisition_operator = fourier_operator @ csm_operator
+
+# Set up TV-regularization as a PDHG problem
+nabla = FiniteDifferenceOp(dim=(-2, -1))
+K = LinearOperatorMatrix(((acquisition_operator,), (nabla,)))
+f = L2NormSquared(target=kdata.data) | alpha * L1NormViewAsReal()
+
+# Solve the problem
+x0 = acquisition_operator.H(kdata_us.data)
+img, = pdhg(f=f, g=None, operator=K, initial_value=x0)`,
+    link: 'https://github.com/PTB-MR/mrpro/blob/main/examples/scripts/tv_minimization_reconstruction_pdhg.py'
   }
 ];
 
