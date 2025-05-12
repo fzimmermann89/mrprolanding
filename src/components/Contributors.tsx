@@ -9,7 +9,7 @@ interface Contributor {
 }
 
 // Blacklist of contributors to exclude
-const EXCLUDED_CONTRIBUTORS = ['pre-commit-ci', 'pre-commit-ci[bot]' 'dependabot', 'dependabot[bot]'];
+const EXCLUDED_CONTRIBUTORS = ['pre-commit-ci', 'pre-commit-ci[bot]', 'dependabot', 'dependabot[bot]'];
 
 const Contributors: React.FC = () => {
   const [contributors, setContributors] = useState<Contributor[]>([]);
