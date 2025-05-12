@@ -30,6 +30,7 @@ m0, t1 = lbfgs(functional, [m0_start, t1_start])`,
     description: 'For data acquired using pulseq-based sequences, MRpro can automatically calculate the trajectory directly from the provided seq-file, making it easy to work with custom sequences.',
     code: `# Tell mrpro to get the trajectory from a Pulseq file
 trajectory = KTrajectoryPulseq("spiral2d.seq")
+# Load the data, automatically filling in the trajectory
 kdata = KData.from_file("spiral2d.mrd", trajectory)`,
     link: 'https://github.com/PTB-MR/mrpro/blob/main/examples/scripts/comparison_trajectory_calculators.py'
   },
