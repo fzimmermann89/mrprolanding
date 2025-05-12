@@ -60,22 +60,18 @@ const Hero: React.FC = () => {
             </div>
           </div>
           <div className="w-full lg:w-1/2 flex justify-center">
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w-2xl">
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-600 to-teal-500 opacity-75 blur"></div>
               <div className="relative bg-white p-6 rounded-2xl shadow-xl overflow-hidden">
                 <div className="text-sm font-mono mb-2 text-gray-500">Example: Simple reconstruction</div>
-                <pre className="text-xs md:text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
-                  <code className="language-python text-gray-800">
-{`# Tell mrpro the type of trajectory
-trajectory = mrpro.data.traj_calculators.KTrajectoryCartesian()
-
-# Load in the Data from the ISMRMRD file
-kdata = mrpro.data.KData.from_file(data_file.name, trajectory)
-
-# Perform the reconstruction
-reconstruction = mrpro.algorithms.reconstruction.DirectReconstruction(kdata)
-img = reconstruction(kdata)
-`}
+                <pre className="text-xs md:text-sm bg-gray-50 p-4 rounded-lg whitespace-pre-wrap">
+                  <code className="font-mono">
+                    {`# Tell mrpro the type of trajectory\ntrajectory = mrpro.data.traj_calculators.KTrajectoryCartesian()\n\n# Load in the Data from the ISMRMRD file\nkdata = mrpro.data.KData.from_file(data_file.name, trajectory)\n\n# Perform the reconstruction\nreconstruction = mrpro.algorithms.reconstruction.DirectReconstruction(kdata)\nimg = reconstruction(kdata)`.split('\n').map((line, index) => (
+                      <span key={index} className={line.trim().startsWith('#') ? 'text-gray-400' : 'text-gray-800'}>
+                        {line}
+                        {index < 7 && '\n'}
+                      </span>
+                    ))}
                   </code>
                 </pre>
                 <div className="mt-4 flex justify-end">

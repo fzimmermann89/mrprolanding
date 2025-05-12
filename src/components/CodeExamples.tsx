@@ -60,9 +60,9 @@ const CodeExample: React.FC<{ example: CodeExampleProps }> = ({ example }) => {
             </button>
           </div>
           <pre className="bg-gray-50 p-4 rounded-lg text-sm whitespace-pre-wrap">
-            <code className="text-gray-800 font-mono">
+            <code className="font-mono">
               {example.code.split('\n').map((line, index) => (
-                <span key={index} className={line.trim().startsWith('#') ? 'text-gray-400' : ''}>
+                <span key={index} className={line.trim().startsWith('#') ? 'text-gray-400' : 'text-gray-800'}>
                   {line}
                   {index < example.code.split('\n').length - 1 && '\n'}
                 </span>
