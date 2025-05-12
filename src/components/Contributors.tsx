@@ -19,6 +19,13 @@ const Contributors: React.FC = () => {
       try {
         const response = await fetch('https://api.github.com/repos/PTB-MR/mrpro/contributors');
         const data = await response.json();
+
+        if (!Array.isArray(data)) {
+          console.error('Unexpected data format from GitHub API:', data);
+          setContributors([]);
+          return;
+        }
+
         const filteredContributors = data.filter(
           (contributor: Contributor) => !EXCLUDED_CONTRIBUTORS.includes(contributor.login)
         );
@@ -39,6 +46,7 @@ const Contributors: React.FC = () => {
         setContributors(contributorsWithNames);
       } catch (error) {
         console.error('Error fetching contributors:', error);
+        setContributors([]);
       }
     };
 
