@@ -38,8 +38,8 @@ const Footer: React.FC = () => {
             <div>
               <h3 className="text-lg font-semibold mb-4">About</h3>
               <p className="text-gray-400 text-sm">
-                MRpro is a Python package for MR image reconstruction and processing, 
-                specifically developed for PyTorch.
+                MRpro is a Python package for MR image reconstruction and processing in PyTorch. 
+                Development was initiated at PTB Berlin.
               </p>
             </div>
             
