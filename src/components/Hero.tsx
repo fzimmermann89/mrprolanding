@@ -66,7 +66,7 @@ const Hero: React.FC = () => {
                 <div className="text-sm font-mono mb-2 text-gray-500">Example: Simple reconstruction</div>
                 <pre className="text-xs md:text-sm bg-gray-50 p-4 rounded-lg whitespace-pre-wrap">
                   <code className="font-mono">
-                    {`# Tell mrpro the type of trajectory\ntrajectory = mrpro.data.traj_calculators.KTrajectoryCartesian()\n\n# Load in the Data from the ISMRMRD file\nkdata = mrpro.data.KData.from_file(data_file.name, trajectory)\n\n# Perform the reconstruction\nreconstruction = mrpro.algorithms.reconstruction.DirectReconstruction(kdata)\nimg = reconstruction(kdata)`.split('\n').map((line, index) => (
+                    {`# Tell mrpro the type of trajectory\ntrajectory = mrpro.data.traj_calculators.KTrajectoryCartesian()\n\n# Load in the Data from the ISMRMRD file\nkdata = mrpro.data.KData.from_file(file, trajectory)\n\n# Perform the reconstruction\nreconstruction = mrpro.algorithms.reconstruction.DirectReconstruction(kdata)\nimg = reconstruction(kdata)`.split('\n').map((line, index) => (
                       <span key={index} className={line.trim().startsWith('#') ? 'text-gray-400' : 'text-gray-800'}>
                         {line}
                         {index < 7 && '\n'}
