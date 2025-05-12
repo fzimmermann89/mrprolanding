@@ -11,28 +11,16 @@ interface CodeExampleProps {
 
 const examples: CodeExampleProps[] = [
   {
-    id: 'simple',
-    title: 'Simple Reconstruction',
-    description: 'Read the data and trajectory and reconstruct an image by applying a density compensation function and then the adjoint of the Fourier operator and the adjoint of the coil sensitivity operator.',
-    code: `# Read the trajectory from the ISMRMRD file
-trajectory = mrpro.data.traj_calculators.KTrajectoryIsmrmrd()
-# Load in the Data from the ISMRMRD file
-kdata = mrpro.data.KData.from_file(data_file.name, trajectory)
-# Perform the reconstruction
-reconstruction = mrpro.algorithms.reconstruction.DirectReconstruction(kdata)
-img = reconstruction(kdata)`,
-    link: 'https://github.com/PTB-MR/mrpro/blob/main/examples/scripts/direct_reconstruction.py'
-  },
-  {
     id: 'quant',
     title: 'Quantitative Parameters',
     description: 'Quantitative parameter maps can be obtained by creating a functional to be minimized and calling a non-linear solver such as ADAM.',
     code: `# Define signal model
 model = MagnitudeOp() @ InversionRecovery(ti=idata_multi_ti.header.ti)
+
 # Define loss function and combine with signal model
 mse = MSE(idata_multi_ti.data.abs())
 functional = mse @ model
-[...]
+
 # Run optimization
 params_result = adam(functional, [m0_start, t1_start], n_iterations=n_iterations, learning_rate=learning_rate)`,
     link: 'https://github.com/PTB-MR/mrpro/blob/main/examples/scripts/qmri_sg_challenge_2024_t1.py'
@@ -71,9 +59,14 @@ const CodeExample: React.FC<{ example: CodeExampleProps }> = ({ example }) => {
               {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4 text-gray-500" />}
             </button>
           </div>
-          <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto text-sm">
+          <pre className="bg-gray-50 p-4 rounded-lg text-sm whitespace-pre-wrap">
             <code className="text-gray-800 font-mono">
-              {example.code}
+              {example.code.split('\n').map((line, index) => (
+                <span key={index} className={line.trim().startsWith('#') ? 'text-gray-400' : ''}>
+                  {line}
+                  {index < example.code.split('\n').length - 1 && '\n'}
+                </span>
+              ))}
             </code>
           </pre>
         </div>
@@ -103,7 +96,7 @@ const CodeExamples: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
           {examples.map((example) => (
             <CodeExample key={example.id} example={example} />
           ))}
