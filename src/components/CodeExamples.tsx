@@ -13,7 +13,7 @@ const examples: CodeExampleProps[] = [
   {
     id: 'quant',
     title: 'Quantitative Parameters',
-    description: 'Quantitative parameter maps can be obtained by creating a functional to be minimized and calling a non-linear solver such as ADAM.',
+    description: 'Quantitative parameter maps can be obtained by creating a functional to be minimized and calling a non-linear solver.',
     code: `# Define signal model
 model = MagnitudeOp() @ InversionRecovery(ti=data.header.ti)
 
