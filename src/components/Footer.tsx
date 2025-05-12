@@ -151,7 +151,7 @@ const Footer: React.FC = () => {
                   10587 Berlin<br />
                 </p>
                 <p className="mt-2">
-                  E-Mail: <a href="mailto:info@mrpro.rocks" className="hover:text-white transition-colors">info@emerpro.de</a>
+                  E-Mail: <a href="mailto:info@mrpro.rocks" className="hover:text-white transition-colors">info@mrpro.rocks</a>
                 </p>
               </div>
 
