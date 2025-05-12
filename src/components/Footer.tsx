@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
                 Development was initiated at PTB Berlin.
               </p>
               <p className="text-gray-400 text-sm mt-4">
-                Licensed under the
+                Licensed under the 
                 <a 
                   href="https://github.com/PTB-MR/mrpro/blob/main/LICENSE" 
                   target="_blank"
