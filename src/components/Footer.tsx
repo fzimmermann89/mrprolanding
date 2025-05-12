@@ -6,6 +6,7 @@ interface Contributor {
   avatar_url: string;
   html_url: string;
   contributions: number;
+  name?: string;
 }
 
 // Blacklist of contributors to exclude
@@ -22,7 +23,21 @@ const Footer: React.FC = () => {
         const filteredContributors = data.filter(
           (contributor: Contributor) => !EXCLUDED_CONTRIBUTORS.includes(contributor.login)
         );
-        setContributors(filteredContributors);
+
+        // Fetch real names for each contributor
+        const contributorsWithNames = await Promise.all(
+          filteredContributors.map(async (contributor: Contributor) => {
+            try {
+              const userResponse = await fetch(`https://api.github.com/users/${contributor.login}`);
+              const userData = await userResponse.json();
+              return { ...contributor, name: userData.name || contributor.login };
+            } catch (error) {
+              return { ...contributor, name: contributor.login };
+            }
+          })
+        );
+
+        setContributors(contributorsWithNames);
       } catch (error) {
         console.error('Error fetching contributors:', error);
       }
@@ -69,6 +84,17 @@ const Footer: React.FC = () => {
               <p className="text-gray-400 text-sm">
                 MRpro is a Python package for MR image reconstruction and processing in PyTorch. 
                 Development was initiated at PTB Berlin.
+              </p>
+              <p className="text-gray-400 text-sm mt-4">
+                Licensed under the{' '}
+                <a 
+                  href="https://github.com/PTB-MR/mrpro/blob/main/LICENSE" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  Apache License 2.0
+                </a>
               </p>
             </div>
             
@@ -157,45 +183,13 @@ const Footer: React.FC = () => {
                     Contribute
                   </a>
                 </li>
-                <li>
-                  <a 
-                    href="https://github.com/PTB-MR/mrpro/graphs/contributors" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    Contributors
-                  </a>
-                </li>
               </ul>
             </div>
           </div>
           
           <div className="border-t border-gray-800 pt-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="md:col-span-3">
-                <h3 className="text-sm font-semibold text-gray-400 mb-4">Contributors</h3>
-                <div className="flex flex-wrap gap-2">
-                  {contributors.map((contributor) => (
-                    <a
-                      key={contributor.login}
-                      href={contributor.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative"
-                      title={contributor.login}
-                    >
-                      <img
-                        src={contributor.avatar_url}
-                        alt={`${contributor.login}'s avatar`}
-                        className="w-10 h-10 rounded-full hover:ring-2 hover:ring-blue-500 transition-all"
-                      />
-                    </a>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="text-sm text-gray-400">
+              <div className="text-xs text-gray-500 md:col-span-1">
                 <h3 className="font-semibold mb-2">Impressum</h3>
                 <p className="mb-2">
                   Verantwortlich im Sinne des Pressegesetzes
@@ -209,6 +203,28 @@ const Footer: React.FC = () => {
                 <p className="mt-2">
                   E-Mail: <a href="mailto:info@emerpro.de" className="hover:text-white transition-colors">info@emerpro.de</a>
                 </p>
+              </div>
+
+              <div className="md:col-span-3">
+                <h3 className="text-sm font-semibold text-gray-400 mb-4">Contributors</h3>
+                <div className="flex flex-wrap gap-2">
+                  {contributors.map((contributor) => (
+                    <a
+                      key={contributor.login}
+                      href={contributor.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative"
+                      title={contributor.name}
+                    >
+                      <img
+                        src={contributor.avatar_url}
+                        alt={`${contributor.name}'s avatar`}
+                        className="w-10 h-10 rounded-full hover:ring-2 hover:ring-blue-500 transition-all duration-150"
+                      />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
