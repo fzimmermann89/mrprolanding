@@ -36,7 +36,7 @@ kdata = KData.from_file("spiral2d.mrd", trajectory)`,
     {
     id: 'tv',
     title: 'Advanced reconstruction',
-    description: 'Besides AI, MRpro also contains the building blocks to recreate many compressed sensing algorithms.',
+    description: 'Besides AI, MRpro also contains the building blocks to recreate many compressed sensing algorithms. These can then even be used within AI reconstructions!',
     code: `# Undersample data by indexing
 kdata_us = kdata[...,::4,:]
 
