@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <a 
-                    href="https://ptb-mr.github.io/mrpro/" 
+                    href="https://docs.emerpro.de" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
