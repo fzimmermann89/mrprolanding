@@ -100,7 +100,7 @@ const Features: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Main Features</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            MRpro provides a comprehensive set of tools for MR image reconstruction and processing in python
+            MRpro provides a comprehensive set of tools for MR image reconstruction and processing in Python
           </p>
         </div>
         
