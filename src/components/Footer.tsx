@@ -198,14 +198,13 @@ const Footer: React.FC = () => {
               <div className="text-sm text-gray-400">
                 <h3 className="font-semibold mb-2">Impressum</h3>
                 <p className="mb-2">
-                  Verantwortlich im Sinne des Pressegesetzes:
+                  Verantwortlich im Sinne des Pressegesetzes
                 </p>
                 <p>
                   Felix Zimmermann<br />
                   Physikalisch-Technische Bundesanstalt (PTB)<br />
                   Abbestraße 2-12<br />
                   10587 Berlin<br />
-                  Deutschland
                 </p>
                 <p className="mt-2">
                   E-Mail: <a href="mailto:info@emerpro.de" className="hover:text-white transition-colors">info@emerpro.de</a>
