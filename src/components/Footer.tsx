@@ -40,18 +40,20 @@ const Footer: React.FC = () => {
               <h3 className="text-lg font-semibold mb-4">About</h3>
               <p className="text-gray-400 text-sm">
                 MRpro is a Python package for MR image reconstruction and processing in PyTorch. 
-                Development was initiated at PTB Berlin.
+                Development was initiated at <a 
+                  href="https://www.ptb.de/cms/en/ptb/fachabteilungen/abt8/fb-81.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >PTB Berlin</a>.
               </p>
               <p className="text-gray-400 text-sm mt-4">
-                OpenSource under 
-                <a 
+                OpenSource under <a 
                   href="https://github.com/PTB-MR/mrpro/blob/main/LICENSE" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
-                >
-                   Apache License 2.0
-                </a>
+                >Apache License 2.0</a>
               </p>
             </div>
             
