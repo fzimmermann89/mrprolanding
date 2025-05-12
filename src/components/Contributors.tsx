@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Contributor {
   login: string;
@@ -45,8 +45,12 @@ async function getContributors() {
   }
 }
 
-const Contributors = async () => {
-  const contributors = await getContributors();
+const Contributors = () => {
+  const [contributors, setContributors] = useState<Contributor[]>([]);
+
+  useEffect(() => {
+    getContributors().then(setContributors);
+  }, []);
 
   return (
     <div>
