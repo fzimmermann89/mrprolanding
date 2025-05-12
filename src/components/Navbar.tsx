@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
                 <Github className="h-5 w-5" />
               </a>
               <a 
-                href="https://ptb-mr.github.io/mrpro/" 
+                href="https://docs.emerpro.de" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-blue-600 transition-colors"
