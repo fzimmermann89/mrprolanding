@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Github, BookOpen, Menu, X } from 'lucide-react';
+import { Github, BookOpen, Menu, X, Map } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +20,8 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isHomePage = location.pathname === '/';
+
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -26,25 +30,40 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <img src="/logo.svg" alt="MRpro Logo" className="h-8 w-8" />
             <span className="text-xl font-bold text-gray-900">MRpro</span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Features
-            </a>
-            <a href="#examples" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Examples
-            </a>
-            <a href="#install" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Installation
-            </a>
-            <a href="#resources" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Resources
-            </a>
+            {isHomePage ? (
+              <>
+                <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors">
+                  Features
+                </a>
+                <a href="#examples" className="text-gray-700 hover:text-blue-600 transition-colors">
+                  Examples
+                </a>
+                <a href="#install" className="text-gray-700 hover:text-blue-600 transition-colors">
+                  Installation
+                </a>
+                <a href="#resources" className="text-gray-700 hover:text-blue-600 transition-colors">
+                  Resources
+                </a>
+              </>
+            ) : (
+              <Link to="/" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Home
+              </Link>
+            )}
+            <Link 
+              to="/overview" 
+              className="text-gray-700 hover:text-blue-600 transition-colors flex items-center"
+            >
+              <Map className="h-4 w-4 mr-1" />
+              Overview
+            </Link>
             <div className="flex items-center space-x-4">
               <a 
                 href="https://github.com/PTB-MR/mrpro" 
@@ -88,34 +107,54 @@ const Navbar: React.FC = () => {
         {isOpen && (
           <div className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
-              <a 
-                href="#features" 
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+              {isHomePage ? (
+                <>
+                  <a 
+                    href="#features" 
+                    className="text-gray-700 hover:text-blue-600 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Features
+                  </a>
+                  <a 
+                    href="#examples" 
+                    className="text-gray-700 hover:text-blue-600 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Examples
+                  </a>
+                  <a 
+                    href="#install" 
+                    className="text-gray-700 hover:text-blue-600 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Installation
+                  </a>
+                  <a 
+                    href="#resources" 
+                    className="text-gray-700 hover:text-blue-600 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Resources
+                  </a>
+                </>
+              ) : (
+                <Link 
+                  to="/" 
+                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Home
+                </Link>
+              )}
+              <Link 
+                to="/overview" 
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center"
                 onClick={() => setIsOpen(false)}
               >
-                Features
-              </a>
-              <a 
-                href="#examples" 
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Examples
-              </a>
-              <a 
-                href="#install" 
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Installation
-              </a>
-              <a 
-                href="#resources" 
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Resources
-              </a>
+                <Map className="h-4 w-4 mr-1" />
+                Overview
+              </Link>
               <div className="flex items-center space-x-4 pt-2">
                 <a 
                   href="https://github.com/PTB-MR/mrpro" 
