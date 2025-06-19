@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -7,19 +6,6 @@ import CodeExamples from './components/CodeExamples';
 import Installation from './components/Installation';
 import Resources from './components/Resources';
 import Footer from './components/Footer';
-import MindMap from './components/MindMap';
-
-function HomePage() {
-  return (
-    <>
-      <Hero />
-      <Features />
-      <CodeExamples />
-      <Installation />
-      <Resources />
-    </>
-  );
-}
 
 function App() {
   useEffect(() => {
@@ -49,16 +35,15 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="min-h-screen">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/overview" element={<MindMap />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <div className="min-h-screen">
+      <Navbar />
+      <Hero />
+      <Features />
+      <CodeExamples />
+      <Installation />
+      <Resources />
+      <Footer />
+    </div>
   );
 }
 
